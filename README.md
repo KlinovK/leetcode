@@ -20,21 +20,21 @@ Browse by category or check the list below for specific topics:
 
 ### Easy
 
-Array manipulation
-String operations
-Basic algorithms
+- Array manipulation
+- String operations
+- Basic algorithms
 
 ### Medium
 
-Dynamic programming
-Tree traversal
-Graph algorithms
+- Dynamic programming
+- Tree traversal
+- Graph algorithms
 
 ### Hard
 
-Advanced algorithms
-Complex data structures
-Optimization problems
+- Advanced algorithms
+- Complex data structures
+- Optimization problems
 
 ## Contributing
 Found a bug or have a suggestion? Open an issue or submit a pull request!
