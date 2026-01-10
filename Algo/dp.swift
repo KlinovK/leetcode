@@ -30,4 +30,21 @@ class DP {
         return dp[n][m]
     }
     
+    func mincostTickets(_ days: [Int], _ costs: [Int]) -> Int {
+        var dp = Array(repeating: 0, count: days.count)
+        
+        for i in 0..<days.count {
+            
+            let j = i - 1, m = i - 7, k = i - 30
+            dp[i] = min(
+                dp[j] + costs[0],  // Buy 1-day pass for days[i]
+                dp[k] + costs[1],  // Buy 7-day pass covering days[i]
+                dp[m] + costs[2]   // Buy 30-day pass covering days[i]
+            )
+        }
+        
+        return dp[days.count - 1]
+     
+    }
+    
 }
