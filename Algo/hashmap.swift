@@ -24,3 +24,23 @@ func numSplits(_ s: String) -> Int {
     return goodSplits
     
 }
+
+func minimumLength(_ s: String) -> Int {
+    var charToCount: [Character: Int] = [:]
+    
+    for char in s {
+        charToCount[char, default: 0] += 1
+    }
+ //   "abaacbcbb"
+//    a = 3 1
+//    b = 4 2
+//    c = 2 2
+    
+    var result = 0
+    for count in charToCount.values {
+        result += count % 2 == 0 ? 2 : 1
+    }
+    
+    return result
+    // 5
+}
