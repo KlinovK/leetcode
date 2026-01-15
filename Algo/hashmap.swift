@@ -7,6 +7,26 @@
 
 import Foundation
 
+func findDuplicate(_ paths: [String]) -> [[String]] {
+    var contentToFiles: [String: [String]] = [:]
+    
+    for path in paths {
+        let parts = path.split(separator: " ")
+        let directory = String(parts[0])
+        
+        for file in parts.dropFirst() {
+            let fileNameWithContent = file.split(separator: "(")
+            let fileName = String(fileNameWithContent[0])
+            let content = String(fileNameWithContent[1].dropLast())
+            
+            contentToFiles[content, default: []].append("\(directory)/\(fileName)")
+        }
+    }
+    
+    // Filter to only include groups with 2+ files and convert to array
+    return contentToFiles.values.filter { $0.count >= 2 }.map { $0 }
+}
+
 func numSplits(_ s: String) -> Int {
     let arr = Array(s)
     var goodSplits: Int = 0
