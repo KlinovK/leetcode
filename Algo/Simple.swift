@@ -47,3 +47,19 @@ func minProcessingTime(_ processorTime: [Int], _ tasks: [Int]) -> Int {
     
     return maximum
 }
+
+
+func nthPersonGetsNthSeat(_ n: Int) -> Double {
+//    let n = 5
+    let numerator = 1
+//    let denominator = 5
+//
+//    // As decimal
+    let decimal = Double(numerator) / Double(n)
+//    print(decimal)  // Output: 0.2
+//
+//    // As string
+//    print("\(numerator)/\(denominator)")  // Output: "1/5"
+    
+    return decimal
+}
