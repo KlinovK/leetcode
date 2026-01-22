@@ -7,6 +7,44 @@
 
 import Foundation
 
+func minimumPairRemoval(_ nums: [Int]) -> Int {
+    
+    func isNonDecreasing(_ nums: [Int]) -> Bool {
+        for i in 1..<nums.count {
+            if nums[i] < nums[i-1] {
+                return false
+            }
+        }
+        return true
+    }
+    
+    var total = 0
+    var currentArray = nums
+    
+    while !isNonDecreasing(currentArray) {
+        var minSum = Int.max
+        var minPairIndex = 0
+        
+        // Find the pair with minimum sum
+        for i in 0..<currentArray.count-1 {
+            let currentPairSum = currentArray[i] + currentArray[i+1]
+            
+            if currentPairSum < minSum {
+                minSum = currentPairSum
+                minPairIndex = i
+            }
+        }
+        
+        // Remove the pair and add their sum
+        currentArray.remove(at: minPairIndex)
+        currentArray.remove(at: minPairIndex) // After first removal, i+1 is now at index i
+        currentArray.insert(minSum, at: minPairIndex)
+        
+        total += 1
+    }
+    
+    return total
+}
 func largestEven(_ s: String) -> String {
     let reversed = Array(s.reversed())
     
@@ -48,6 +86,32 @@ func minProcessingTime(_ processorTime: [Int], _ tasks: [Int]) -> Int {
     return maximum
 }
 
+func residuePrefixes(_ s: String) -> Int {
+    var total = 0
+    var distinctChars = Set<Character>()
+    
+    for (index, char) in s.enumerated() {
+        distinctChars.insert(char)
+        let prefixLength = index + 1
+        
+        if distinctChars.count == prefixLength % 3 {
+            total += 1
+        }
+    }
+    
+    return total
+}
+
+func minBitwiseArray(_ nums: [Int]) -> [Int] {
+    var ans = [Int]()
+    
+    for i in 0..<nums.count {
+        ans.append(nums[i] ^ nums[0])
+    }
+    
+    return ans
+}
+
 
 func nthPersonGetsNthSeat(_ n: Int) -> Double {
 //    let n = 5
@@ -62,4 +126,17 @@ func nthPersonGetsNthSeat(_ n: Int) -> Double {
 //    print("\(numerator)/\(denominator)")  // Output: "1/5"
     
     return decimal
+}
+
+func arrangeWords(_ text: String) -> String {
+    let words = text.lowercased().components(separatedBy: " ")
+    let sorted = words.sorted(by: { $0.count < $1.count })
+    var result = sorted.joined(separator: " ")
+    
+    // Capitalize first letter
+    if let first = result.first {
+        result = first.uppercased() + result.dropFirst()
+    }
+    
+    return result
 }
