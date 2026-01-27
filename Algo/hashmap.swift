@@ -7,6 +7,52 @@
 
 import Foundation
 
+func centeredSubarrays(_ nums: [Int]) -> Int {
+    
+    guard !nums.isEmpty else { return 0 }
+      
+      var count = 0
+      
+      for start in 0..<nums.count {
+          var sum = 0
+          var seen = Set<Int>()
+          
+          for end in start..<nums.count {
+              let current = nums[end]
+              sum += current
+              seen.insert(current)
+              
+              if seen.contains(sum) {
+                  count += 1
+              }
+          }
+      }
+      
+      return count
+}
+
+func reverseWords(_ s: String) -> String {
+    let vowels: Set<Character> = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    
+    let components = s.split(separator: " ")
+    
+    guard let firstWord = components.first else { return "" }
+    
+    let firstWordVowelsFreq = firstWord.filter { vowels.contains($0) }.count
+    var resultComponents: [String] = [String(firstWord)]
+    
+    for component in components.dropFirst() {
+        let vowelsInComponent = component.filter { vowels.contains($0) }.count
+        
+        if vowelsInComponent == firstWordVowelsFreq {
+            resultComponents.append(String(component.reversed()))
+        } else {
+            resultComponents.append(String(component))
+        }
+    }
+    
+    return resultComponents.joined(separator: " ")
+}
 func findDuplicate(_ paths: [String]) -> [[String]] {
     var contentToFiles: [String: [String]] = [:]
     

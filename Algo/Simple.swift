@@ -7,6 +7,59 @@
 
 import Foundation
 
+func minimumAbsDifference(_ arr: [Int]) -> [[Int]] {
+    // 1. Sort the array so the closest numbers are neighbors
+    let sortedArr = arr.sorted()
+    var minAbsDiff = Int.max
+    var result: [[Int]] = []
+    
+    // 2. First pass: find the actual minimum difference
+    for i in 0..<(sortedArr.count - 1) {
+        let diff = sortedArr[i + 1] - sortedArr[i]
+        if diff < minAbsDiff {
+            minAbsDiff = diff
+        }
+    }
+    
+    // 3. Second pass: collect all pairs with that difference
+    for i in 0..<(sortedArr.count - 1) {
+        if sortedArr[i + 1] - sortedArr[i] == minAbsDiff {
+            // Append the pair as a single element [a, b]
+            result.append([sortedArr[i], sortedArr[i + 1]])
+        }
+    }
+    
+    return result
+}
+
+func minimumDifference(_ nums: [Int], _ k: Int) -> Int {
+    var minScore = Int.max
+    let sorted = nums.sorted()
+    
+    for i in 0..<(nums.count - k + 1) {
+        // The difference is max - min of the window
+                // In a sorted array, this is last element - first element
+                let currentScore = sorted[i + k - 1] - sorted[i]
+                minScore = min(minScore, currentScore)
+        
+    }
+    
+    return minScore
+    
+}
+
+func minPairSum2(_ nums: [Int]) -> Int {
+    let sorted = nums.sorted()
+    var maxSum = 0
+    let n = sorted.count
+    
+    for i in 0..<(n / 2) {
+        maxSum = max(maxSum, sorted[i] + sorted[n - 1 - i])
+    }
+    
+    return maxSum
+}
+
 func minimumPairRemoval(_ nums: [Int]) -> Int {
     
     func isNonDecreasing(_ nums: [Int]) -> Bool {
