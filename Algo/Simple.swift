@@ -7,6 +7,20 @@
 
 import Foundation
 
+func minimumCost(_ nums: [Int]) -> Int {
+    let n = nums.count
+       var minCost = Int.max
+       
+       for i in 1..<n {
+           for j in (i+1)..<n {
+               let cost = nums[0] + nums[i] + nums[j]
+               minCost = min(minCost, cost)
+           }
+       }
+       
+       return minCost
+}
+
 func minimumAbsDifference(_ arr: [Int]) -> [[Int]] {
     // 1. Sort the array so the closest numbers are neighbors
     let sortedArr = arr.sorted()
