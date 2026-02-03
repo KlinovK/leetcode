@@ -7,6 +7,35 @@
 
 import Foundation
 
+func isTrionic(_ nums: [Int]) -> Bool {
+    let n = nums.count
+    guard n >= 4 else { return false }
+
+    var i = 0
+
+    // Phase 1: strictly increasing (need at least 2 elements, so i >= 1)
+    while i < n - 1 && nums[i] < nums[i + 1] {
+        i += 1
+    }
+    guard i >= 1 && i < n - 1 else { return false }
+
+    // Phase 2: strictly decreasing (need at least 2 elements, so move at least 1)
+    let peakIdx = i
+    while i < n - 1 && nums[i] > nums[i + 1] {
+        i += 1
+    }
+    guard i > peakIdx && i < n - 1 else { return false }
+
+    // Phase 3: strictly increasing (need at least 2 elements, so must reach end)
+    let valleyIdx = i
+    while i < n - 1 && nums[i] < nums[i + 1] {
+        i += 1
+    }
+    guard i > valleyIdx && i == n - 1 else { return false }
+
+    return true
+}
+
 func minimumCost(_ nums: [Int]) -> Int {
     let n = nums.count
        var minCost = Int.max

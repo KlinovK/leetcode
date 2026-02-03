@@ -7,6 +7,29 @@
 
 import Foundation
 
+func countGood(_ nums: [Int], _ k: Int) -> Int {
+    var result = 0
+    var left = 0
+    var freq: [Int: Int] = [:]
+    var pairs = 0
+    
+    for right in 0..<nums.count {
+        // Add right element
+        pairs += freq[nums[right], default: 0]
+        freq[nums[right], default: 0] += 1
+        
+        // Shrink window while good
+        while pairs >= k {
+            result += nums.count - right
+            freq[nums[left]]! -= 1
+            pairs -= freq[nums[left]]!
+            left += 1
+        }
+    }
+    
+    return result
+}
+
 func numberOfArithmeticSlices(_ nums: [Int]) -> Int {
     guard nums.count >= 3 else { return 0 }
     
