@@ -7,6 +7,26 @@
 
 import Foundation
 
+func scoreOfString(_ s: String) -> Int {
+    var total = 0
+    var arr = Array(s)
+    
+    for i in 0..<arr.count-1 {
+        
+        total += abs(Int(arr[i].asciiValue ?? 0) - Int(arr[i + 1].asciiValue ?? 0))
+        
+    }
+    
+    return total
+}
+
+func reverseByType(_ s: String) -> String {
+    var letters = s.filter({$0.isLetter}).reversed().makeIterator()
+    var others = s.filter({!$0.isLetter}).reversed().makeIterator()
+    
+    return String(s.map { $0.isLetter ? letters.next()! : others.next()! })
+}
+
 func isTrionic(_ nums: [Int]) -> Bool {
     let n = nums.count
     guard n >= 4 else { return false }
